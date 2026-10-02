@@ -1,0 +1,22 @@
+﻿ONG Solidariedade - Experiencia Pratica III (Desenvolvimento Front-End)
+
+COMO ABRIR
+Como o site e uma SPA que carrega arquivos com fetch(), precisa de um servidor local
+(abrir com duplo clique no index.html NAO funciona).
+  Opcao 1: duplo clique em iniciar.bat (precisa do Python instalado)
+  Opcao 2: VS Code > extensao Live Server > "Go Live"
+
+ESTRUTURA
+  index.html           casca da SPA (cabecalho, <main id="app">, rodape)
+  html/                telas (inicio, projetos, cadastro, voluntarios)
+  css/style.css        Design System + componentes
+  imagens/             fotos
+  js/main.js           ponto de entrada
+  js/router.js         navegacao SPA por hash (#/projetos)
+  js/templates.js      templates JavaScript (cards, itens, mensagens)
+  js/validacao.js      regras e mascaras do formulario (CPF com digito verificador)
+  js/armazenamento.js  localStorage (voluntarios + rascunho)
+  js/menu.js           menu responsivo
+  js/toast.js          avisos
+  js/dados.js          lista de projetos
+  js/views/            um arquivo por tela
