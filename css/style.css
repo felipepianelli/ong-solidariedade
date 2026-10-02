@@ -15,6 +15,7 @@
 
     --cor-sucesso: #2E7D32;
     --cor-alerta: #D97706;
+    --cor-erro: #C62828;
 
     --cor-fundo: #F4F7F9;
     --cor-fundo-card: #FFFFFF;
@@ -277,8 +278,18 @@ section {
     .menu-links {
         display: none;
         flex-direction: column;
+        align-items: flex-start;
         width: 100%;
         gap: var(--espaco-3);
+    }
+
+    /* classe colocada pelo js/menu.js ao clicar no ☰ */
+    .menu-links.aberto {
+        display: flex;
+    }
+
+    header .navegacao {
+        width: 100%;
     }
 
     .navegacao {
@@ -352,12 +363,17 @@ select:focus {
    VALIDAÇÃO VISUAL
    ===================================================== */
 
-input:valid {
+/* As classes .valido e .invalido são colocadas pelo JavaScript (js/views/cadastro.js) */
+
+input.valido,
+select.valido {
     border-color: var(--cor-sucesso);
 }
 
-input:invalid:not(:placeholder-shown) {
-    border-color: #C62828;
+input.invalido,
+select.invalido {
+    border-color: var(--cor-erro);
+    background: #FFF5F5;
 }
 
 
@@ -466,14 +482,293 @@ footer {
     font-weight: bold;
 }
 
-.toast {
+/* Toast: criado pelo JavaScript (js/toast.js) dentro de #area-toast */
+
+.area-toast {
     position: fixed;
     right: var(--espaco-5);
     bottom: var(--espaco-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-2);
+    z-index: 1000;
+    max-width: calc(100% - 2 * var(--espaco-5));
+}
+
+.toast {
     background: var(--cor-primaria-escura);
     color: var(--cor-texto-claro);
     padding: var(--espaco-4) var(--espaco-5);
     border-radius: var(--raio-borda);
     box-shadow: var(--sombra-card);
-    z-index: 1000;
+    animation: toast-entrada 0.25s ease;
+}
+
+.toast-sucesso { background: var(--cor-sucesso); }
+.toast-erro    { background: var(--cor-erro); }
+
+@keyframes toast-entrada {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* =====================================================
+   COMPONENTES DA SPA (EP III)
+   ===================================================== */
+
+/* Link de acessibilidade: só aparece quando recebe foco pelo teclado */
+.pular-conteudo {
+    position: absolute;
+    left: var(--espaco-4);
+    top: -100px;
+    background: var(--cor-secundaria);
+    color: var(--cor-texto);
+    padding: var(--espaco-2) var(--espaco-4);
+    border-radius: var(--raio-borda);
+    z-index: 2000;
+}
+
+.pular-conteudo:focus {
+    top: var(--espaco-2);
+}
+
+main {
+    margin-top: var(--espaco-6);
+}
+
+main:focus {
+    outline: none;
+}
+
+.marca-nome {
+    margin: 0;
+    font-size: var(--tamanho-xl);
+    font-weight: bold;
+}
+
+.marca-slogan {
+    margin: 0;
+}
+
+header .navegacao {
+    background: none;
+    padding: 0;
+}
+
+.menu-links a {
+    padding: var(--espaco-1) 0;
+    border-bottom: 3px solid transparent;
+}
+
+.menu-links a.ativo {
+    border-bottom-color: var(--cor-secundaria);
+}
+
+.texto-secundario {
+    color: var(--cor-texto-secundario);
+    font-size: var(--tamanho-sm);
+    margin: 0;
+}
+
+.carregando {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+h1 { color: var(--cor-primaria); margin: 0; }
+h2 { color: var(--cor-primaria); margin: 0; }
+
+.destaque {
+    background: var(--cor-fundo-card);
+    border-left: 6px solid var(--cor-secundaria);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
+    padding: var(--espaco-6);
+}
+
+.coluna-metade {
+    grid-column: span 6;
+}
+
+/* Links com cara de botão */
+a.botao {
+    display: inline-block;
+    background: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+    padding: var(--espaco-3) var(--espaco-5);
+    border-radius: var(--raio-borda);
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+a.botao:hover {
+    background: var(--cor-primaria-escura);
+    transform: translateY(-2px);
+}
+
+a.botao:focus-visible {
+    outline: 3px solid var(--cor-secundaria);
+    outline-offset: 3px;
+}
+
+a.botao-secundario,
+button.botao-secundario {
+    background: var(--cor-secundaria);
+    color: var(--cor-texto);
+}
+
+a.botao-secundario:hover,
+button.botao-secundario:hover {
+    background: var(--cor-secundaria-clara);
+}
+
+button.botao-perigo {
+    background: var(--cor-erro);
+}
+
+button.botao-perigo:hover {
+    background: #8E1B1B;
+}
+
+.acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espaco-3);
+    margin: 0;
+}
+
+/* Filtros de projetos */
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espaco-2);
+}
+
+button.filtro {
+    background: var(--cor-fundo-card);
+    color: var(--cor-primaria);
+    border: 2px solid var(--cor-primaria);
+}
+
+button.filtro:hover {
+    background: var(--cor-fundo);
+}
+
+button.filtro.ativo {
+    background: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+}
+
+/* Cards (Grid responsivo automático) */
+.lista-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--espaco-5);
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background: var(--cor-fundo-card);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-corpo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--espaco-3);
+    padding: var(--espaco-5);
+    flex: 1;
+}
+
+.card-corpo h3 { margin: 0; color: var(--cor-primaria); }
+.card-corpo p  { margin: 0; flex: 1; }
+
+/* Formulário */
+.campo {
+    margin-bottom: var(--espaco-4);
+}
+
+.campo label {
+    margin-bottom: var(--espaco-2);
+}
+
+.mensagem-erro {
+    display: block;
+    min-height: 1.2em;
+    margin-top: var(--espaco-1);
+    color: var(--cor-erro);
+    font-size: var(--tamanho-sm);
+    font-weight: bold;
+}
+
+#feedback-formulario:focus {
+    outline: none;
+}
+
+.feedback-alerta ul {
+    margin: var(--espaco-2) 0 0;
+    padding-left: var(--espaco-5);
+}
+
+.feedback-alerta a {
+    color: inherit;
+}
+
+.feedback-sucesso a {
+    color: inherit;
+    margin-left: var(--espaco-2);
+}
+
+/* Lista de voluntários */
+.lista-voluntarios {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-3);
+}
+
+.item-voluntario {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espaco-4);
+    flex-wrap: wrap;
+    background: var(--cor-fundo-card);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
+    padding: var(--espaco-4) var(--espaco-5);
+}
+
+.vazio {
+    background: var(--cor-fundo-card);
+    border: 2px dashed var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: var(--espaco-6);
+    text-align: center;
+    color: var(--cor-texto-secundario);
+}
+
+address {
+    font-style: normal;
+}
+
+/* Telas menores: colunas viram bloco inteiro */
+@media (max-width: 768px) {
+    .coluna-metade {
+        grid-column: 1 / -1;
+    }
 }
