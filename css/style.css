@@ -1,0 +1,479 @@
+/* =====================================================
+   DESIGN SYSTEM - ONG SOLIDARIEDADE
+   ===================================================== */
+
+:root {
+
+    /* ---------- CORES ---------- */
+
+    --cor-primaria: #0B4F71;
+    --cor-primaria-escura: #073B55;
+    --cor-primaria-clara: #2F80A8;
+
+    --cor-secundaria: #F39C12;
+    --cor-secundaria-clara: #F8B84E;
+
+    --cor-sucesso: #2E7D32;
+    --cor-alerta: #D97706;
+
+    --cor-fundo: #F4F7F9;
+    --cor-fundo-card: #FFFFFF;
+
+    --cor-texto: #1F2933;
+    --cor-texto-claro: #FFFFFF;
+    --cor-texto-secundario: #52606D;
+
+    --cor-borda: #D9E2EC;
+
+
+    /* ---------- TIPOGRAFIA ---------- */
+
+    --fonte-principal: Arial, Helvetica, sans-serif;
+
+    --tamanho-xs: 0.75rem;
+    --tamanho-sm: 0.875rem;
+    --tamanho-md: 1rem;
+    --tamanho-lg: 1.25rem;
+    --tamanho-xl: 1.75rem;
+    --tamanho-xxl: 2.25rem;
+
+
+    /* ---------- ESPAÇAMENTOS ---------- */
+
+    --espaco-1: 0.25rem;
+    --espaco-2: 0.5rem;
+    --espaco-3: 0.75rem;
+    --espaco-4: 1rem;
+    --espaco-5: 1.5rem;
+    --espaco-6: 2rem;
+    --espaco-7: 3rem;
+    --espaco-8: 4rem;
+
+
+    /* ---------- LAYOUT ---------- */
+
+    --largura-maxima: 1200px;
+    --raio-borda: 10px;
+    --sombra-card: 0 4px 12px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =====================================================
+   CONFIGURAÇÕES GERAIS
+   ===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: var(--fonte-principal);
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* =====================================================
+   GRID RESPONSIVO - 12 COLUNAS
+   ===================================================== */
+
+main {
+    width: min(var(--largura-maxima), 90%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--espaco-5);
+}
+
+main > section {
+    grid-column: 1 / -1;
+}
+
+
+/* =====================================================
+   BREAKPOINT 1 - TELAS GRANDES
+   ===================================================== */
+
+@media (max-width: 1200px) {
+
+    main {
+        width: 92%;
+    }
+
+}
+
+
+/* =====================================================
+   BREAKPOINT 2 - NOTEBOOKS
+   ===================================================== */
+
+@media (max-width: 992px) {
+
+    main {
+        width: 90%;
+        gap: var(--espaco-4);
+    }
+
+}
+
+
+/* =====================================================
+   BREAKPOINT 3 - TABLETS
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+    main {
+        width: 88%;
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+}
+
+
+/* =====================================================
+   BREAKPOINT 4 - CELULARES
+   ===================================================== */
+
+@media (max-width: 576px) {
+
+    main {
+        width: 92%;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--espaco-3);
+    }
+
+}
+
+
+/* =====================================================
+   BREAKPOINT 5 - CELULARES PEQUENOS
+   ===================================================== */
+
+@media (max-width: 400px) {
+
+    main {
+        width: 94%;
+        grid-template-columns: 1fr;
+        gap: var(--espaco-2);
+    }
+
+}
+
+
+/* =====================================================
+   COMPONENTES COM FLEXBOX
+   ===================================================== */
+
+/* Cabeçalho */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espaco-4);
+    flex-wrap: wrap;
+
+    background: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+    padding: var(--espaco-5);
+}
+
+
+/* Menu de navegação */
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-4);
+    flex-wrap: wrap;
+}
+
+
+/* Seções */
+
+section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-4);
+}
+
+
+/* Área de ações do formulário */
+
+.form-acoes {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--espaco-3);
+    flex-wrap: wrap;
+}
+
+
+/* =====================================================
+   NAVEGAÇÃO RESPONSIVA
+   ===================================================== */
+
+.navegacao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espaco-4);
+
+    background: var(--cor-primaria-escura);
+    padding: var(--espaco-3) var(--espaco-5);
+}
+
+.menu-links {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-4);
+}
+
+.menu-links a {
+    color: var(--cor-texto-claro);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.menu-links a:hover {
+    color: var(--cor-secundaria-clara);
+}
+
+
+/* Botão do menu */
+
+.menu-toggle {
+    display: none;
+    border: none;
+    background: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+    font-size: var(--tamanho-lg);
+    padding: var(--espaco-2) var(--espaco-3);
+    border-radius: var(--raio-borda);
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   NAVEGAÇÃO EM TELAS PEQUENAS
+   ===================================================== */
+
+@media (max-width: 576px) {
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: var(--espaco-3);
+    }
+
+    .navegacao {
+        flex-wrap: wrap;
+    }
+
+}
+
+
+/* =====================================================
+   FORMULÁRIOS
+   ===================================================== */
+
+form {
+    background: var(--cor-fundo-card);
+    padding: var(--espaco-6);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
+}
+
+fieldset {
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: var(--espaco-5);
+    margin-bottom: var(--espaco-5);
+}
+
+legend {
+    color: var(--cor-primaria);
+    font-weight: bold;
+    padding: 0 var(--espaco-2);
+}
+
+label {
+    display: block;
+    margin-bottom: var(--espaco-2);
+    color: var(--cor-texto);
+    font-weight: 600;
+}
+
+input,
+select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--espaco-3);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    font-family: var(--fonte-principal);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =====================================================
+   ESTADO DE FOCO
+   ===================================================== */
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--cor-primaria-clara);
+
+    box-shadow:
+        0 0 0 3px rgba(47, 128, 168, 0.20);
+}
+
+
+/* =====================================================
+   VALIDAÇÃO VISUAL
+   ===================================================== */
+
+input:valid {
+    border-color: var(--cor-sucesso);
+}
+
+input:invalid:not(:placeholder-shown) {
+    border-color: #C62828;
+}
+
+
+/* =====================================================
+   BOTÕES
+   ===================================================== */
+
+button {
+    background: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+
+    border: none;
+    border-radius: var(--raio-borda);
+
+    padding:
+        var(--espaco-3)
+        var(--espaco-5);
+
+    font-size: var(--tamanho-md);
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Hover */
+
+button:hover {
+    background: var(--cor-primaria-escura);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-card);
+}
+
+
+/* Foco */
+
+button:focus-visible {
+    outline: 3px solid var(--cor-secundaria);
+    outline-offset: 3px;
+}
+
+
+/* Clique */
+
+button:active {
+    transform: translateY(0);
+}
+
+
+/* Desabilitado */
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   RODAPÉ
+   ===================================================== */
+
+footer {
+    background: var(--cor-primaria-escura);
+    color: var(--cor-texto-claro);
+    text-align: center;
+    padding: var(--espaco-5);
+    margin-top: var(--espaco-7);
+}
+
+/* =====================================================
+   COMPONENTES DE FEEDBACK
+   ===================================================== */
+
+.feedback-sucesso {
+    background: #E8F5E9;
+    color: #2E7D32;
+    border: 1px solid #A5D6A7;
+    padding: var(--espaco-4);
+    border-radius: var(--raio-borda);
+    margin: var(--espaco-4) 0;
+    font-weight: bold;
+}
+
+.feedback-alerta {
+    background: #FFF3E0;
+    color: #D97706;
+    border: 1px solid #F8B84E;
+    padding: var(--espaco-4);
+    border-radius: var(--raio-borda);
+    margin: var(--espaco-4) 0;
+    font-weight: bold;
+}
+
+.badge {
+    display: inline-block;
+    background: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+    padding: var(--espaco-1) var(--espaco-3);
+    border-radius: 20px;
+    font-size: var(--tamanho-sm);
+    font-weight: bold;
+}
+
+.toast {
+    position: fixed;
+    right: var(--espaco-5);
+    bottom: var(--espaco-5);
+    background: var(--cor-primaria-escura);
+    color: var(--cor-texto-claro);
+    padding: var(--espaco-4) var(--espaco-5);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
+    z-index: 1000;
+}
