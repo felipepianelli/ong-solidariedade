@@ -5,36 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ONG Solidariedade - Início</title>
+    <title>ONG Solidariedade</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- type="module" permite usar import/export entre os arquivos JS -->
+    <script type="module" src="js/main.js"></script>
 </head>
 
 <body>
 
+    <!-- Link para pular direto ao conteúdo (acessibilidade para teclado) -->
+    <a class="pular-conteudo" href="#app">Pular para o conteúdo</a>
+
+    <!-- ==========================================
+         CABEÇALHO - fica fixo em todas as "páginas"
+         ========================================== -->
+
     <header>
 
-        <h1>ONG Solidariedade</h1>
-
-        <p>Juntos podemos transformar vidas.</p>
+        <div class="marca">
+            <p class="marca-nome">ONG Solidariedade</p>
+            <p class="marca-slogan">Juntos podemos transformar vidas.</p>
+        </div>
 
         <nav class="navegacao" aria-label="Navegação principal">
 
             <button
                 class="menu-toggle"
                 type="button"
-                aria-label="Abrir menu">
+                aria-label="Abrir menu"
+                aria-expanded="false"
+                aria-controls="menu-links">
                 ☰
             </button>
 
-            <div class="menu-links">
-
-                <a href="index.html">Início</a>
-
-                <a href="projetos.html">Projetos</a>
-
-                <a href="cadastro.html">Seja Voluntário</a>
-
+            <!-- Os links usam # (hash). O JavaScript lê o hash e troca o conteúdo
+                 do <main> sem recarregar a página: isso é a SPA. -->
+            <div class="menu-links" id="menu-links">
+                <a href="#/inicio" data-rota="inicio">Início</a>
+                <a href="#/projetos" data-rota="projetos">Projetos</a>
+                <a href="#/cadastro" data-rota="cadastro">Seja Voluntário</a>
+                <a href="#/voluntarios" data-rota="voluntarios">Voluntários</a>
             </div>
 
         </nav>
@@ -42,129 +54,13 @@
     </header>
 
 
-    <main>
+    <!-- ==========================================
+         CONTEÚDO DINÂMICO
+         O router.js coloca aqui o HTML da tela atual
+         ========================================== -->
 
-        <!-- ==========================================
-             APRESENTAÇÃO
-             ========================================== -->
-
-        <section aria-labelledby="titulo-bem-vindo">
-
-            <h2 id="titulo-bem-vindo">
-                Bem-vindo à ONG Solidariedade
-            </h2>
-
-            <p>
-                Nossa organização atua no desenvolvimento de projetos sociais,
-                campanhas de doação e ações de voluntariado para contribuir
-                com pessoas e comunidades.
-            </p>
-
-            <img
-                src="img/voluntarios.jpg"
-                alt="Pessoas trabalhando juntas em uma ação de voluntariado">
-
-        </section>
-
-
-        <!-- ==========================================
-             SOBRE A ONG
-             ========================================== -->
-
-        <section aria-labelledby="titulo-atuacao">
-
-            <h2 id="titulo-atuacao">
-                Sobre a nossa atuação
-            </h2>
-
-            <p>
-                Trabalhamos para conectar pessoas que desejam contribuir
-                com iniciativas sociais por meio de doações e trabalho voluntário.
-            </p>
-
-            <img
-                src="img/projeto-social.jpg"
-                alt="Mãos cuidando de uma muda de planta representando um projeto social">
-
-        </section>
-
-
-        <!-- ==========================================
-             CONTATO
-             ========================================== -->
-
-        <section aria-labelledby="titulo-contato">
-
-            <h2 id="titulo-contato">
-                Entre em contato
-            </h2>
-
-            <p>
-                Telefone: (11) 99999-9999
-            </p>
-
-            <p>
-                E-mail: contato@ongsolidariedade.org.br
-            </p>
-
-            <p>
-                São Paulo - SP
-            </p>
-
-        </section>
-
-
-        <!-- ==========================================
-             FEEDBACK DA PLATAFORMA
-             ========================================== -->
-
-        <section aria-labelledby="feedback-titulo">
-
-            <h2 id="feedback-titulo">
-                Feedback da plataforma
-            </h2>
-
-            <div
-                class="feedback-sucesso"
-                role="status">
-
-                Cadastro realizado com sucesso!
-
-            </div>
-
-
-            <div
-                class="feedback-alerta"
-                role="alert">
-
-                Atenção: verifique os dados informados antes de continuar.
-
-            </div>
-
-
-            <p>
-                Projetos ativos:
-
-                <span class="badge">
-                    4 projetos
-                </span>
-            </p>
-
-        </section>
-
-
-        <!-- ==========================================
-             NOTIFICAÇÃO
-             ========================================== -->
-
-        <div
-            class="toast"
-            role="status">
-
-            Obrigado por apoiar a ONG Solidariedade!
-
-        </div>
-
+    <main id="app" tabindex="-1">
+        <p class="carregando">Carregando...</p>
     </main>
 
 
@@ -173,13 +69,17 @@
          ========================================== -->
 
     <footer>
-
-        <p>
-            &copy; 2026 ONG Solidariedade.
-            Todos os direitos reservados.
-        </p>
-
+        <p>&copy; 2026 ONG Solidariedade. Todos os direitos reservados.</p>
     </footer>
+
+
+    <!-- Área onde os avisos (toasts) aparecem. aria-live faz o leitor de tela anunciar. -->
+    <div id="area-toast" class="area-toast" aria-live="polite"></div>
+
+    <!-- Aviso caso o JavaScript esteja desligado -->
+    <noscript>
+        <p class="feedback-alerta">Ative o JavaScript para usar a plataforma.</p>
+    </noscript>
 
 </body>
 
