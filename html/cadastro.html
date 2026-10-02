@@ -1,0 +1,106 @@
+<!-- TELA: CADASTRO
+     novalidate = desliga os balões padrão do navegador.
+     Quem valida e mostra as mensagens é o nosso JavaScript (js/validacao.js e js/views/cadastro.js). -->
+
+<section aria-labelledby="titulo-cadastro">
+
+    <h1 id="titulo-cadastro">Cadastro de Voluntários</h1>
+
+    <p>Preencha seus dados para participar das nossas ações. Campos com * são obrigatórios.</p>
+
+    <!-- Aqui aparece o resumo de erros ou de sucesso -->
+    <div id="feedback-formulario" tabindex="-1"></div>
+
+    <form id="form-cadastro" novalidate>
+
+        <fieldset>
+            <legend>Dados pessoais</legend>
+
+            <div class="campo">
+                <label for="nome">Nome completo *</label>
+                <input type="text" id="nome" name="nome" autocomplete="name" aria-describedby="erro-nome">
+                <span class="mensagem-erro" id="erro-nome"></span>
+            </div>
+
+            <div class="campo">
+                <label for="email">E-mail *</label>
+                <input type="email" id="email" name="email" autocomplete="email" aria-describedby="erro-email">
+                <span class="mensagem-erro" id="erro-email"></span>
+            </div>
+
+            <div class="campo">
+                <label for="nascimento">Data de nascimento *</label>
+                <input type="date" id="nascimento" name="nascimento" aria-describedby="erro-nascimento">
+                <span class="mensagem-erro" id="erro-nascimento"></span>
+            </div>
+
+            <div class="campo">
+                <label for="cpf">CPF *</label>
+                <input type="text" id="cpf" name="cpf" inputmode="numeric" maxlength="14"
+                    placeholder="000.000.000-00" aria-describedby="erro-cpf">
+                <span class="mensagem-erro" id="erro-cpf"></span>
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Endereço e contato</legend>
+
+            <div class="campo">
+                <label for="telefone">Telefone *</label>
+                <input type="tel" id="telefone" name="telefone" autocomplete="tel" maxlength="15"
+                    placeholder="(11) 99999-9999" aria-describedby="erro-telefone">
+                <span class="mensagem-erro" id="erro-telefone"></span>
+            </div>
+
+            <div class="campo">
+                <label for="cep">CEP *</label>
+                <input type="text" id="cep" name="cep" inputmode="numeric" autocomplete="postal-code" maxlength="9"
+                    placeholder="00000-000" aria-describedby="erro-cep">
+                <span class="mensagem-erro" id="erro-cep"></span>
+            </div>
+
+            <div class="campo">
+                <label for="cidade">Cidade *</label>
+                <input type="text" id="cidade" name="cidade" autocomplete="address-level2" aria-describedby="erro-cidade">
+                <span class="mensagem-erro" id="erro-cidade"></span>
+            </div>
+
+            <div class="campo">
+                <label for="estado">Estado (UF) *</label>
+                <input type="text" id="estado" name="estado" maxlength="2" placeholder="SP"
+                    autocomplete="address-level1" aria-describedby="erro-estado">
+                <span class="mensagem-erro" id="erro-estado"></span>
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Forma de participação</legend>
+
+            <div class="campo">
+                <label for="interesse">Como deseja contribuir? *</label>
+                <select id="interesse" name="interesse" aria-describedby="erro-interesse">
+                    <option value="">Selecione uma opção</option>
+                    <option value="doacao">Doação</option>
+                    <option value="voluntariado">Voluntariado</option>
+                    <option value="ambos">Doação e voluntariado</option>
+                </select>
+                <span class="mensagem-erro" id="erro-interesse"></span>
+            </div>
+
+        </fieldset>
+
+        <div class="form-acoes">
+            <button type="reset" class="botao-secundario">Limpar</button>
+            <button type="submit">Enviar cadastro</button>
+        </div>
+
+        <p class="texto-secundario">
+            Seus dados ficam salvos apenas neste navegador (localStorage).
+            O que você digitar também fica guardado como rascunho até enviar.
+        </p>
+
+    </form>
+
+</section>
