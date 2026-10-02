@@ -18,10 +18,10 @@ export function escapar(texto) {
 export function cardProjeto(projeto) {
     return `
         <article class="card">
-            <img src="${projeto.imagem}" alt="${escapar(projeto.alt)}">
+            <img src="${projeto.imagem}" alt="${escapar(projeto.alt)}" loading="lazy" decoding="async">
             <div class="card-corpo">
                 <span class="badge">${nomesCategorias[projeto.categoria]}</span>
-                <h3>${escapar(projeto.titulo)}</h3>
+                <h2>${escapar(projeto.titulo)}</h2>
                 <p>${escapar(projeto.descricao)}</p>
                 <a class="botao" href="#/cadastro">Quero participar</a>
             </div>
