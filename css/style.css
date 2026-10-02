@@ -25,6 +25,7 @@
     --cor-texto-secundario: #52606D;
 
     --cor-borda: #D9E2EC;
+    --cor-borda-campo: #6B7C8F; /* contraste 4,28:1 com branco (WCAG 1.4.11 pede 3:1) */
 
 
     /* ---------- TIPOGRAFIA ---------- */
@@ -335,9 +336,10 @@ select {
     width: 100%;
     box-sizing: border-box;
     padding: var(--espaco-3);
-    border: 1px solid var(--cor-borda);
+    border: 1px solid var(--cor-borda-campo);
     border-radius: var(--raio-borda);
     font-family: var(--fonte-principal);
+    font-size: var(--tamanho-md);
 
     transition:
         border-color 0.2s ease,
@@ -351,11 +353,23 @@ select {
 
 input:focus,
 select:focus {
-    outline: none;
-    border-color: var(--cor-primaria-clara);
+    /* contorno sólido e bem visível (WCAG 2.4.7); não removemos o outline sem substituto */
+    outline: 3px solid var(--cor-primaria);
+    outline-offset: 2px;
+    border-color: var(--cor-primaria);
+}
 
-    box-shadow:
-        0 0 0 3px rgba(47, 128, 168, 0.20);
+/* Foco visível em links (menu fica sobre fundo escuro, por isso a cor secundária) */
+a:focus-visible {
+    outline: 3px solid var(--cor-primaria);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.menu-links a:focus-visible,
+header a:focus-visible,
+footer a:focus-visible {
+    outline-color: var(--cor-secundaria-clara);
 }
 
 
@@ -464,7 +478,7 @@ footer {
 
 .feedback-alerta {
     background: #FFF3E0;
-    color: #D97706;
+    color: #92400E; /* contraste 6,46:1 (antes #D97706 tinha 2,9:1) */
     border: 1px solid #F8B84E;
     padding: var(--espaco-4);
     border-radius: var(--raio-borda);
@@ -692,7 +706,7 @@ button.filtro.ativo {
     flex: 1;
 }
 
-.card-corpo h3 { margin: 0; color: var(--cor-primaria); }
+.card-corpo h2 { margin: 0; color: var(--cor-primaria); font-size: var(--tamanho-lg); }
 .card-corpo p  { margin: 0; flex: 1; }
 
 /* Formulário */
@@ -764,6 +778,21 @@ button.filtro.ativo {
 
 address {
     font-style: normal;
+}
+
+/* Respeita quem pediu menos movimento no sistema (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    button:hover,
+    a.botao:hover {
+        transform: none;
+    }
 }
 
 /* Telas menores: colunas viram bloco inteiro */
