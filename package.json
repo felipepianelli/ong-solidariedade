@@ -1,0 +1,15 @@
+{
+  "name": "ong-solidariedade",
+  "version": "1.2.0",
+  "private": true,
+  "description": "Plataforma da ONG Solidariedade (SPA em JavaScript puro)",
+  "type": "module",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "html-minifier-terser": "^7.2.0"
+  }
+}
